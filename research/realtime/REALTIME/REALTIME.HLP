@@ -1,0 +1,60 @@
+help
+$ 18>Help not available
+$ 63>Section Length: |sets number of bars |before restarting section
+$ 50>Key Signature: |numerator sets |# of beats per bar
+$ 61>Key Signature: |denominator sets |beat value (4=Quarter Note)
+$ 37>Section Tempo |(in Quarter Notes/Min)
+$ 54>Continuous Controls Menu: |select type of data to view
+$ 66>Control Number: |sets MIDI control number |when viewing 'controls'
+$  3>N/A
+$  3>N/A
+$ 84>Display Mode: |sets event information |to be displayed on tracks |which are selected
+$ 65>View Selector: |access to different pages of |Section information
+$  3>N/A
+$  3>N/A
+$ 66>Select Track: |left mouse button selects, |right button edits name
+$ 69>Articulation Probabilities: |sets chance for each |articulation value
+$ 68>Strike (velocity) Probabilities: |sets chance for each |strike value
+$ 78>Articulation (3-325%): |5 symbolic note lengths set as |% of time to next note
+$ 76>Strike (0-127: MIDI Velocity): |5 symbols which affect |all track velocities
+$ 65>Sound Choice: |sets default patch(program)-change |for this track
+$ 20>Track's MIDI channel
+$ 67>Bondage Master: |select another track as |'role model' for behavior
+$ 64>Bond track to |master's pitches (on), |use slave's pitches (off)
+$ 78>Bond track to |master's durations (on), |use slave's articulation values (off)
+$ 73>Bond track to |master's velocities (on), |use slave's strike values (off)
+$ 69>Echo master's pitch bend, |channel/poly pressure, |controls and loops
+$ 41>Track Delay: |+/- 1/192 of a quarter note
+$ 66>Time Deviation range: |sets push(+) and pull(-) |values for 'feel'
+$ 62>Note Density: |sets the chance (%) |each note has of occurring
+$ 63>Track Transpose: |sets the interval (+/- 96) |for transposition
+$ 76>'S?' (note-type) Pitch Ordering: |100=defined, 0=random, |1-99 mixes the two
+$ 73>Counter Skip: |If 'on', pitch will advance |even if Note Density stops it
+$ 54>Pitch Counter Sync: |Links fills to the |track counter
+$ 57>Fill Percentage: |sets probability that |fills will occur
+$ 56>Track Volume: |sets starting MIDI volume |for this track
+$ 52>Fill Transposition: |sets the transposition of fills
+$ 64>Fill Pitch Ordering: |100=defined, 0=random, |1-99 mixes the two
+$ 75>Fill Counter Skip: |If 'on' pitches will advance |even if no fill is played
+$  3>N/A
+$ 67>Fill Quantize: |Fills will sound only if |on Quantize +/- Deviation
+$ 68>Fill Deviation: |Fills will sound only if |on Quantize +/- Deviation
+$ 57>Fill Limit: |Sets the least amount of |time between fills
+$ 83>Fill Division: |Sets number of fills |between events |fills occur on (distance/Div)
+$ 57>Velocity Follow: |Fills will follow |velocities when 'on'
+$ 64>Articulation Follow: |Fills will follow |articulations when 'on'
+$ 57>Pitch Follow: |Fills will follow |pitches/steps when 'on'
+$ 77>Follow Numerical: |sets number of notes to look |back on for fill inspiration
+$ 75>Fill Track Selector: |sets the Track whose sounds |will be used for filling
+$ 82>Track Solo: |solos the selected tracks |(select multiple tracks |with shift-click)
+$ 62>Track Lock: |Protect this track from |any recording or editing
+$  3>N/A
+$ 27>Track Mute: mutes the track
+$ 43>Track Filling: |Enable/Disables Fill events
+$ 68>View Quantization: |sets the resolution of |the visible Section grid
+$ 65>Record Quantization: |sets the resolution of |record quantization
+$102>Preset Velocities: |sets with which velocity |level to paste note events|(set levels in Velocity View)
+$103>Preset Articulations: |sets with which articulation |level to paste note events|(see Articulation View)
+$ 99>Random Velocity: |When this note is played |velocity is chosen from |preset levels using statistics
+$107>Random Articulation: |When this note is played |articulation is chosen from |preset levels using statistics
+$$
