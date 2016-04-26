@@ -17,13 +17,11 @@ const int stepsPerRevolution = 100;  // change this to fit the number of steps p
 // for your motor
 
 // initialize the stepper library on pins 8 through 11:
-Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+Stepper myStepper(stepsPerRevolution, 8, 9, 12, 13);
 
 void setup() {
-  // set the speed at 60 rpm:
-  myStepper.setSpeed(600);
   // initialize the serial port:
-  Serial.begin(9600);
+  Serial.begin(57600);
 }
 
 void sweepMotor(int from, int to, int factor, int dir) {
@@ -75,9 +73,11 @@ void chorus(int itters) {
 }
 
 void loop() {
-  //intro(2);
-  //chorus(100);
-   myStepper.setSpeed(random(1000,15000));
-   myStepper.step(stepsPerRevolution); 
+   delay(2000);
+   myStepper.setSpeed(30);
+   myStepper.step(stepsPerRevolution/2);
+   delay(5000);
+   myStepper.setSpeed(30);
+   myStepper.step(-stepsPerRevolution/2);
+   delay(9000);
 }
-
