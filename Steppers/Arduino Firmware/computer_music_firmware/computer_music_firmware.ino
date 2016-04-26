@@ -10,9 +10,6 @@
 #include <Stepper.h>
 #include <MIDI.h>
 
-#define CLOCK_WISE 1
-#define COUNTER_CLOCK_WISE -1
-
 MIDI_CREATE_DEFAULT_INSTANCE();
 // these moth
 const int stepsPerRevolution = 100;  // change this to fit the number of steps per revolution
@@ -30,9 +27,17 @@ void setup() {
   MIDI.setHandleNoteOff(handleNoteOff);
   MIDI.begin(MIDI_CHANNEL_OMNI);
   Serial.begin(115200);
-  }
-  
+  Serial.print("booted");
+}
+
 void handleNoteOff(byte channel, byte pitch, byte velocity) {
+  
+  Serial.print(channel);
+  Serial.print(" - ");
+  Serial.print(pitch);
+  Serial.print(" - ");
+  Serial.println(velocity);
+  
   switch (channel) {
 
     case 1:
@@ -42,7 +47,7 @@ void handleNoteOff(byte channel, byte pitch, byte velocity) {
         driveOpen[0] = false;
       }
       break;
-      
+
     case 2:
       myStepper2.setSpeed(pitch);
       if (driveOpen[1]) {
@@ -50,7 +55,7 @@ void handleNoteOff(byte channel, byte pitch, byte velocity) {
         driveOpen[1] = false;
       }
       break;
-      
+
     case 3:
       myStepper3.setSpeed(pitch);
       if (driveOpen[2]) {
@@ -58,7 +63,7 @@ void handleNoteOff(byte channel, byte pitch, byte velocity) {
         driveOpen[2] = false;
       }
       break;
-      
+
     case 4:
       myStepper4.setSpeed(pitch);
       if (driveOpen[3]) {
@@ -73,6 +78,11 @@ void handleNoteOn(byte channel, byte pitch, byte velocity) {
   /*
      Takes in a drive number and a velocity
   */
+    Serial.print(channel);
+  Serial.print(" - ");
+  Serial.print(pitch);
+  Serial.print(" - ");
+  Serial.println(velocity);
   switch (channel) {
 
     case 1:
@@ -82,7 +92,7 @@ void handleNoteOn(byte channel, byte pitch, byte velocity) {
         driveOpen[0] = true;
       }
       break;
-      
+
     case 2:
       myStepper2.setSpeed(velocity);
       if (!driveOpen[1]) {
@@ -90,7 +100,7 @@ void handleNoteOn(byte channel, byte pitch, byte velocity) {
         driveOpen[1] = true;
       }
       break;
-      
+
     case 3:
       myStepper3.setSpeed(velocity);
       if (!driveOpen[2]) {
@@ -98,7 +108,7 @@ void handleNoteOn(byte channel, byte pitch, byte velocity) {
         driveOpen[2] = true;
       }
       break;
-      
+
     case 4:
       myStepper4.setSpeed(velocity);
       if (!driveOpen[3]) {
@@ -110,5 +120,5 @@ void handleNoteOn(byte channel, byte pitch, byte velocity) {
 }
 
 void loop() {
- MIDI.read();
+  MIDI.read();
 }
