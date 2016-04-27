@@ -8,7 +8,7 @@ to arduino:
 ---------------------------------------------
 
 message id:         (1) cd_trey 
-bytes:              1
+bytes:              3
 format:             1rrr .iii
                         i (message id) = 1
                         r (CDROM number) = 0-7
@@ -20,7 +20,7 @@ decode:
 ---------------------------------------------
 
 message id:         (2) cd_stepper_note
-bytes:              2
+bytes:              3
 format:             1rrr .iii 0vvv vvvv 0mmm mmmm
                         i (message id) = 2
                         v (midi note) = 0-127
@@ -37,7 +37,7 @@ decode:
 ---------------------------------------------
 
 message id:         (3) hdd_stepper
-bytes:              2
+bytes:              3
 format              1rrr. .iii 0vvv vvvv 
                         r(HDD number) = 0-7
                         v (velocity) = 0-127
