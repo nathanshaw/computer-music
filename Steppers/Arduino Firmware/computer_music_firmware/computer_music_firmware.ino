@@ -1,13 +1,11 @@
 /*
   Stepper Motor Control - For Ajays Motor
 
-  This code is for the
-
-
+  This code is for the HDD drives (to pull the strings)
 */
 #include <Stepper.h>
 
-// these moth
+//its actually 100, but one revolution is too much
 const int stepsPerRevolution = 100;  // change this to fit the number of steps per revolution
 int driveOpen[] = {false, false, false, false};
 byte dataBytes[3];
@@ -31,11 +29,11 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 1:
       myStepper1.setSpeed(velocity);
       if (!driveOpen[0]) {
-        myStepper1.step(stepsPerRevolution);
+        myStepper1.step(stepsPerRevolution*0.5);
         driveOpen[0] = true;
       }
       else {
-        myStepper1.step(-stepsPerRevolution);
+        myStepper1.step(-stepsPerRevolution*0.5);
         driveOpen[0] = false;
       }
       break;
@@ -43,23 +41,24 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 2:
       myStepper2.setSpeed(velocity);
       if (!driveOpen[1]) {
-        myStepper2.step(stepsPerRevolution);
+        myStepper2.step(stepsPerRevolution*0.5);
         driveOpen[1] = true;
       }
       else {
-        myStepper2.step(-stepsPerRevolution);
+        myStepper2.step(-stepsPerRevolution*0.5);
         driveOpen[1] = false;
       }
       break;
 
     case 3:
+      // for some reason this stepper is switched
       myStepper3.setSpeed(velocity);
       if (!driveOpen[2]) {
-        myStepper3.step(stepsPerRevolution);
+        myStepper3.step(-stepsPerRevolution*0.5);
         driveOpen[2] = true;
       }
       else {
-        myStepper3.step(-stepsPerRevolution);
+        myStepper3.step(stepsPerRevolution*0.5);
         driveOpen[2] = false;
       }
       break;
@@ -67,11 +66,11 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 4:
       myStepper4.setSpeed(velocity);
       if (!driveOpen[3]) {
-        myStepper4.step(stepsPerRevolution);
+        myStepper4.step(stepsPerRevolution*0.5);
         driveOpen[3] = true;
       }
       else {
-        myStepper4.step(-stepsPerRevolution);
+        myStepper4.step(-stepsPerRevolution*0.5);
         driveOpen[3] = false;
       }
       break;
