@@ -30,6 +30,8 @@ def hddStepper(driveNum, velocity):
 
 def cdRomStepperNote(driveNum, midiNote, velocity):
     """ for sending messages to the stepper motors on CDROMs"""
+    print("CDROM stepper {} triggered at midi note {} with velocity {}"\
+          .format(driveNum, midiNote, velocity))
     flag = chr(255)
     msgType = chr(1)
     driveNum = chr(driveNum)
@@ -37,19 +39,18 @@ def cdRomStepperNote(driveNum, midiNote, velocity):
     velocity = chr(velocity)
     msgString = (flag, msgType, driveNum, midiNote, velocity)
     cdRomArduino.write(msgString)
-    print("CDROM stepper {} triggered at midi note {} with velocity {}"\
-          .format(driveNum, midiNote, velocity))
     print(msgString)
 
 def cdRomTrey(driveNum):
     """ for pressing the open drive button on the front of the CDROM drive """
+    print("CDROM {}'s trey button had been activated".format(driveNum))
     flag = chr(255)
-    msgType = chr(1)
+    msgType = chr(2)
     driveNum = chr(driveNum)
     zilch = chr(0)
     msgString = (flag, msgType, driveNum,  zilch, zilch)
     cdRomArduino.write(msgString)
-    print("CDROM {}'s trey button had been activated".format(driveNum))
+    print(msgString)
 
 
 def main():
@@ -84,6 +85,8 @@ def main():
                                 hddStepper(channel - 8, pitch)
                             elif channel < 17:
                                 cdRomTrey(channel-12)
+                        elif (channel + 28 < 5 and channel + 28 > 0):
+                            cdRomTrey(channel + 28)
 
                     except Exception as e:
                         print("error parsing MIDI : {} : {} - {}".format(e, message, type(message)))
