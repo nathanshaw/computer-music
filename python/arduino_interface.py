@@ -83,6 +83,7 @@ def moppyNote(driveNum, periodData1, periodData2):
         msgString = (driveNum, periodData1, periodData2)
         moppyArduino2.write(msgString)
     print(msgString)
+
 def main():
     """Main program function"""
     port = 'IAC Driver Computer Music'
@@ -92,10 +93,12 @@ def main():
         midiin, port_name = open_midiport(port)
     except (EOFError, KeyboardInterrupt):
         sys.exit()
+
     try:
         floppyMidiIn, floppyPortName = open_midiport(floppyPort)
     except (EOFError, KeyboardInterrupt):
         sys.exit()
+
     print("Entering main loop. Press Control-C to exit.")
     try:
         timer = time.time()
@@ -103,6 +106,7 @@ def main():
         while True:
             msg = midiin.get_message()
             fmsg = floppyMidiIn.get_message()
+
             if fmsg:
                 message, fDeltatime = fmsg
                 fTimer += fDeltatime
@@ -144,7 +148,7 @@ def main():
                             elif channel < 13:
                                 hddStepper(channel - 8, pitch)
                             elif channel < 17:
-                                cdRomTrey(channel-12)
+                                cdRomTrey(channel-13)
                         elif (channel + 28 < 5 and channel + 28 > 0):
                             cdRomTrey(channel + 28)
 
@@ -155,10 +159,12 @@ def main():
             time.sleep(0.01)
     except KeyboardInterrupt:
         print('')
+
     finally:
         print("Exit.")
         midiin.close_port()
         del midiin
+
 
 if __name__ == '__main__':
     main();

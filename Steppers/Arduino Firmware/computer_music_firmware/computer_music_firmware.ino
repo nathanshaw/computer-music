@@ -9,6 +9,10 @@
 const int stepsPerRevolution = 100;  // change this to fit the number of steps per revolution
 int driveOpen[] = {false, false, false, false};
 byte dataBytes[3];
+byte stepsTaken[4] = {0,0,0,0};
+const uint16_t downSpeed = 200;
+const uint8_t compThresh[4] = {6, 15, 15, 15};
+const float turnScale = 0.55;
 
 // for your motor
 Stepper myStepper1(stepsPerRevolution, 2, 3, 4, 5);
@@ -19,6 +23,12 @@ Stepper myStepper4(stepsPerRevolution, A0, A1, A2, A3);
 void setup() {
   Serial.begin(57600);
   Serial.print("booted");
+  myStepper1.setSpeed(75);
+  myStepper2.setSpeed(75);
+  myStepper3.setSpeed(75);
+  myStepper4.setSpeed(75);
+  myStepper1.step(50);
+  myStepper1.step(-50);
 }
 
 void handleMsg(byte channel, uint16_t velocity) {
@@ -29,11 +39,17 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 1:
       myStepper1.setSpeed(velocity);
       if (!driveOpen[0]) {
-        myStepper1.step(stepsPerRevolution*0.5);
+        myStepper1.step(-stepsPerRevolution*turnScale);
         driveOpen[0] = true;
+                if (velocity > 50) {stepsTaken[0]++;};
+        if(stepsTaken[0] > compThresh[0]) {
+          stepsTaken[0] = 0;
+          myStepper1.step(2);
+        }
       }
       else {
-        myStepper1.step(-stepsPerRevolution*0.5);
+        myStepper1.setSpeed(downSpeed*0.75);
+        myStepper1.step(stepsPerRevolution*turnScale);
         driveOpen[0] = false;
       }
       break;
@@ -41,11 +57,18 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 2:
       myStepper2.setSpeed(velocity);
       if (!driveOpen[1]) {
-        myStepper2.step(stepsPerRevolution*0.5);
+        myStepper2.step(-stepsPerRevolution*turnScale);
         driveOpen[1] = true;
+        if (velocity > 50) {stepsTaken[1]++;};
+        
+        if(stepsTaken[1] > compThresh[1]) {
+          stepsTaken[1] = 0;
+          myStepper2.step(2);
+        }
       }
       else {
-        myStepper2.step(-stepsPerRevolution*0.5);
+        myStepper2.setSpeed(downSpeed);
+        myStepper2.step(stepsPerRevolution*turnScale);
         driveOpen[1] = false;
       }
       break;
@@ -54,11 +77,18 @@ void handleMsg(byte channel, uint16_t velocity) {
       // for some reason this stepper is switched
       myStepper3.setSpeed(velocity);
       if (!driveOpen[2]) {
-        myStepper3.step(-stepsPerRevolution*0.5);
+        myStepper3.step(stepsPerRevolution*turnScale);
         driveOpen[2] = true;
+        
+        if (velocity > 50) {stepsTaken[2]++;};
+        if(stepsTaken[2] > compThresh[2]) {
+          stepsTaken[2] = 0;
+          myStepper3.step(2);
+        }
       }
       else {
-        myStepper3.step(stepsPerRevolution*0.5);
+        myStepper3.setSpeed(downSpeed);
+        myStepper3.step(-stepsPerRevolution*turnScale);
         driveOpen[2] = false;
       }
       break;
@@ -66,11 +96,18 @@ void handleMsg(byte channel, uint16_t velocity) {
     case 4:
       myStepper4.setSpeed(velocity);
       if (!driveOpen[3]) {
-        myStepper4.step(stepsPerRevolution*0.5);
+        myStepper4.step(stepsPerRevolution*turnScale);
         driveOpen[3] = true;
+        
+        if (velocity > 50) {stepsTaken[3]++;};
+        if(stepsTaken[3] > compThresh[3]) {
+          stepsTaken[3] = 0;
+          myStepper4.step(2);
+        }
       }
       else {
-        myStepper4.step(-stepsPerRevolution*0.5);
+        myStepper4.setSpeed(downSpeed);
+        myStepper4.step(-stepsPerRevolution*turnScale);
         driveOpen[3] = false;
       }
       break;
@@ -79,7 +116,7 @@ void handleMsg(byte channel, uint16_t velocity) {
 
 void serialPoller() {
   while(Serial.available()) {
-    if (Serial.available()) {
+    if (Serial.available() > 2) {
       Serial.readBytes((char*)dataBytes, 3);
       /*
        * if (Serial.available() > 3) {
@@ -88,9 +125,8 @@ void serialPoller() {
       */
       if (dataBytes[0] == 0xFF) {
         byte driveNum = dataBytes[1];
-        uint16_t velocity = dataBytes[2]*2;
+        uint16_t velocity = max(dataBytes[2], 35);
         handleMsg(driveNum, velocity);
-        
       }
     }
     else {
