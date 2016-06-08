@@ -13,6 +13,10 @@ byte stepsTaken[4] = {0,0,0,0};
 const uint16_t downSpeed = 200;
 const uint8_t compThresh[4] = {6, 15, 15, 15};
 const float turnScale = 0.55;
+// Leds
+const uint8_t red_led_pin = A4;
+const uint8_t green_led_pin = A5;
+
 
 // for your motor
 Stepper myStepper1(stepsPerRevolution, 2, 3, 4, 5);
@@ -21,6 +25,11 @@ Stepper myStepper3(stepsPerRevolution, 10, 11, 12, 13);
 Stepper myStepper4(stepsPerRevolution, A0, A1, A2, A3);
 
 void setup() {
+  pinMode(red_led_pin, OUTPUT);
+  pinMode(green_led_pin, OUTPUT);
+  digitalWrite(red_led_pin, HIGH);
+  digitalWrite(green_led_pin, LOW);
+  delay(1000);
   Serial.begin(57600);
   Serial.print("booted");
   myStepper1.setSpeed(75);
@@ -29,6 +38,8 @@ void setup() {
   myStepper4.setSpeed(75);
   myStepper1.step(50);
   myStepper1.step(-50);
+  digitalWrite(red_led_pin, LOW);
+  digitalWrite(green_led_pin, HIGH);
 }
 
 void handleMsg(byte channel, uint16_t velocity) {
