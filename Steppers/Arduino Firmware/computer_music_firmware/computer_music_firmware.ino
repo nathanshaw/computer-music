@@ -32,12 +32,18 @@ void setup() {
   delay(1000);
   Serial.begin(57600);
   Serial.print("booted");
-  myStepper1.setSpeed(75);
-  myStepper2.setSpeed(75);
-  myStepper3.setSpeed(75);
-  myStepper4.setSpeed(75);
-  myStepper1.step(50);
-  myStepper1.step(-50);
+  myStepper1.setSpeed(95);
+  myStepper2.setSpeed(95);
+  myStepper3.setSpeed(95);
+  myStepper4.setSpeed(95);
+  myStepper1.step(100);
+  myStepper1.step(-100);
+  myStepper2.step(100);
+  myStepper2.step(-100);
+  myStepper3.step(100);
+  myStepper3.step(-100);
+  myStepper4.step(100);
+  myStepper4.step(-100);
   digitalWrite(red_led_pin, LOW);
   digitalWrite(green_led_pin, HIGH);
 }

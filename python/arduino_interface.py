@@ -12,14 +12,14 @@ from rtmidi.midiutil import open_midiport
 log = logging.getLogger('test_midiin_poll')
 logging.basicConfig(level=logging.DEBUG)
 
-cdRomArduino = serial.Serial('/dev/cu.usbmodem14211', 57600, timeout = 0.1)
+cdRomArduino = serial.Serial('/dev/cu.usbmodem14211', 57600, timeout = 0.5)
 hddStepperArduino = serial.Serial('/dev/cu.usbmodem14221', 57600, timeout = 0.1)
 moppyArduino1 = serial.Serial('/dev/cu.usbmodem14231', 57600, timeout = 0.1)
-moppyArduino2 = serial.Serial('/dev/cu.usbmodem142411', 57600, timeout = 0.1)
-
-midiOut = rtmidi.MidiOut();
-
-time.sleep(6)
+moppyArduino2 = serial.Serial('/dev/cu.usbmodem14241', 57600, timeout = 0.1)
+print("Available Serial Ports : ")
+print("----------------------------")
+print("cdRomArduino : ", cdRomArduino, type(cdRomArduino))
+print("----------------------------")
 
 ARDUINO_RESOLUTION = 40
 microPeriods = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,6 +86,10 @@ def moppyNote(driveNum, periodData1, periodData2):
 
 def main():
     """Main program function"""
+    midiOut = rtmidi.MidiOut();
+
+    time.sleep(6)
+
     port = 'IAC Driver Computer Music'
     floppyPort = 'IAC Driver Moppy Bus 1'
 
