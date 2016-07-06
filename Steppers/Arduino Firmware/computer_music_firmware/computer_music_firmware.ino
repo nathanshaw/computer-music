@@ -5,6 +5,9 @@
 */
 #include <Stepper.h>
 
+// for the handshake
+const uint8_t id = 1
+
 //its actually 100, but one revolution is too much
 const int stepsPerRevolution = 100;  // change this to fit the number of steps per revolution
 int driveOpen[] = {false, false, false, false};
@@ -128,7 +131,7 @@ void handleMsg(byte channel, uint16_t velocity) {
         driveOpen[3] = false;
       }
       break;
-  }
+  }    
 }
 
 void serialPoller() {
@@ -141,6 +144,9 @@ void serialPoller() {
       }
       */
       if (dataBytes[0] == 0xFF) {
+        if (dataBytes[1] == 0xFF) {
+          Serial.write(id);
+        }
         byte driveNum = dataBytes[1];
         uint16_t velocity = max(dataBytes[2], 35);
         handleMsg(driveNum, velocity);
