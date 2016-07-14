@@ -19,3 +19,9 @@ CHANNELS 1-4 ARE THE STEPPERS ON THE SECOND BUS
 - midi notes split around 64 moving the motor one way or another
 - taken care of via python
 - one arduino MEGA takes care of these 
+
+PREREQUISITES:
+
+sudo apt-get install python-dev libxml2-dev libxslt-dev
+rtmidi python binding - pip install rtmidi-python
+

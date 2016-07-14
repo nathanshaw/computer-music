@@ -59,7 +59,7 @@
     --------------------------------------------------------
 """
 import time, logging, sys, json, os
-import rtmidi
+# import rtmidi
 from datetime import datetime
 import requests
 from kad_users import KadUsers
@@ -78,6 +78,7 @@ moppyArduino1 = serial.Serial('/dev/cu.usbmodem14231', 57600, timeout = 0.1)
 moppyArduino2 = serial.Serial('/dev/cu.usbmodem142411', 57600, timeout = 0.1)
 """
 
+"""
 computer_music_port = rtmidi.MidiOut().open_port(0)
 moppy_port1 = rtmidi.MidiOut().open_port(1)
 moppy_port2 = rtmidi.MidiOut().open_port(2)
@@ -99,6 +100,7 @@ for port in available_ports:
 print('moppy port 1 : ', moppy1)
 print('moppy port 2 : ', moppy2)
 print('computer music port 2 : ', computer_music)
+"""
 
 time.sleep(6)
 
@@ -148,6 +150,7 @@ def hourly_jingle(hour):
     Also perhaps
     """
     print("playing hourly jingle for the {} hour".format(hour))
+    """
     for i in range(hour):
         note_on = [0x90, 50 + i, 112]
         note_off = [0x80,  50 + i, 0]
@@ -163,6 +166,7 @@ def hourly_jingle(hour):
         time.sleep(0.0125*random.randrange(7))
         midiOut.send_message(note_off)
         time.sleep(0.0125*random.randrange(7))
+    """
 
 def check_time():
     """
