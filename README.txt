@@ -23,5 +23,9 @@ CHANNELS 1-4 ARE THE STEPPERS ON THE SECOND BUS
 PREREQUISITES:
 
 sudo apt-get install python-dev libxml2-dev libxslt-dev
+sudo apt-get install libasound2-dev
+easy_install rtmidi-python
+sudo apt-get install jack-tools ant openjdk-7-jdk fftw3 qjackctl
 rtmidi python binding - pip install rtmidi-python
-
+sudo pip install git-python
+sudo pip install jira
