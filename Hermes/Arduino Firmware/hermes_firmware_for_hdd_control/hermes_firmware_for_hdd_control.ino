@@ -1,12 +1,11 @@
 /*
-  Stepper Motor Control - For Ajays Motor
-
-  This code is for the HDD drives (to pull the strings)
+Stepper Motor Control - For Ajays Motor
+This code is for the HDD drives (to pull the strings)
 */
 #include <Stepper.h>
 
 // for the handshake
-const uint8_t id = 1
+const uint8_t id = 22;
 
 //its actually 100, but one revolution is too much
 const int stepsPerRevolution = 100;  // change this to fit the number of steps per revolution
@@ -48,7 +47,7 @@ void setup() {
   myStepper4.step(100);
   myStepper4.step(-100);
   digitalWrite(red_led_pin, LOW);
-  digitalWrite(green_led_pin, HIGH);
+  // digitalWrite(green_led_pin, HIGH);
 }
 
 void handleMsg(byte channel, uint16_t velocity) {
@@ -138,11 +137,6 @@ void serialPoller() {
   while(Serial.available()) {
     if (Serial.available() > 2) {
       Serial.readBytes((char*)dataBytes, 3);
-      /*
-       * if (Serial.available() > 3) {
-        Serial.flush();
-      }
-      */
       if (dataBytes[0] == 0xFF) {
         if (dataBytes[1] == 0xFF) {
           Serial.write(id);
