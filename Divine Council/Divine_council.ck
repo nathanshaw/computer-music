@@ -64,6 +64,32 @@ fun void gods3(int note, int vel, int delay){
     out.send();
 }
 
+
+fun void gods4(int note, int vel, int delay){
+    out.start("/brigid7");
+    out.add(note);
+    out.add(vel);
+    out.send();
+    delay::ms => now;
+    out.start("/brigid7");
+    out.add(note);
+    out.add(0);
+    out.send();
+}
+
+
+fun void gods5(int note, int vel, int delay){
+    out.start("/brigid8");
+    out.add(note);
+    out.add(vel);
+    out.send();
+    delay::ms => now;
+    out.start("/brigid8");
+    out.add(note);
+    out.add(0);
+    out.send();
+ }
+
 fun void stairwayToHeavan(int note, int vel){
     out.start("/hermes1");
     out.add(note);
@@ -71,16 +97,17 @@ fun void stairwayToHeavan(int note, int vel){
     out.send();
 }
 
-
-
 while(true) {
     for (int i; i < 6; i++) {
         i + 60 => int note;
-        spork ~ stairwayToHeavan(Math.random2(60,64), 
-                                 Math.random2(100,1023));
-        spork ~ gods3(note, 500, 10);
-        Math.random2(5, 50)::ms => now;
+        // spork ~ stairwayToHeavan(Math.random2(60,64), 
+        //                          Math.random2(1000,1023));
+        // spork ~ gods1(note, 500, 1023);
+        // spork ~ gods2(note, 500, 10);
+        // spork ~ gods3(note, 500, 10);
+        // spork ~ gods4(note, 500, 10);
+        // spork ~ gods5(note, 500, 10);
+        Math.random2(5, 25)::ms => now;
     }
-    //200::ms => now;
 }
 
