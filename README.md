@@ -1,3 +1,5 @@
+![Computer Music At the 2016 DAE](https://i1.wp.com/bitdeph.com/wp-content/uploads/2016/03/Computer-music-at-the-Expo.jpg)
+
 Setup will be as follows
 
 IAC MIDI BUS SHOUDLD BE CREATED ON MAC
