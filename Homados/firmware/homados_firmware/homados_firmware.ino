@@ -11,17 +11,21 @@
  3. Assign a new ARDUINO_ID: the Homados boards are 11 - 20
  
  */
-
+// on H1 10, 12, 14, 16 are broken
 # define NUM_SOLENOIDS 16
+// botnum/board type/board num
+#define ARDUINO_ID 1*
+#define BOT_ID 2
+#define BOT_TYPE 2
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
 #define LED_POWER 11
 #define LED_STATUS 12
-#define ARDUINO_ID 11
+
 #define LED_FEEDBACK 1
-#define SILENT_BOOT 0
+#define BOOT_TEST 1
 
 char bytes[2];
 short notes[NUM_SOLENOIDS];
@@ -30,10 +34,12 @@ int handshake = 0;
 int statustimer = 0;
 
 // actuator pins
+
 int actuators[] = {
   2, 3, 4, 5, 6, 7, 8, 9, 10, 
-  22, 24, 26, 28, 30, 32
+  22, 24, 26, 28, 30, 32, 34
 };
+
 
 void setup() {
   Serial.begin(57600);
@@ -50,9 +56,9 @@ void setup() {
 
   for (int i = 0; i < NUM_SOLENOIDS; i++) {
     pinMode(actuators[i], OUTPUT);
-    if (SILENT_BOOT == 0){
+    if (BOOT_TEST == 1){
       digitalWrite(actuators[i], HIGH);
-      delay(30);
+      delay(60);
       digitalWrite(actuators[i], LOW);
       delay(100);  
     }
@@ -81,18 +87,8 @@ ISR(TIMER2_OVF_vect) {
     digitalWrite(LED_STATUS, LOW);
   }
 }
-// 15 is broken
-//13 is broken?
+
 void loop() {
-  for (int i = 0; i < NUM_SOLENOIDS; i++) {
-    digitalWrite(actuators[i], HIGH);
-    digitalWrite(LED_STATUS, LOW);
-    delay(50); 
-    digitalWrite(LED_STATUS, HIGH);
-    digitalWrite(actuators[i], LOW);
-    delay(100); 
-  }
-  /*
   if (Serial.available()) {
     if (Serial.read() == 0xff) {
       // reads in a two index array from ChucK
@@ -108,6 +104,8 @@ void loop() {
       // message required for "handshake" to occur
       // happens once per Arduino at the start of the ChucK serial code
       if (pitch == 63 && velocity == 1023 && handshake == 0) {
+        Serial.write(BOT_ID);
+        Serial.write(BOT_TYPE);
         Serial.write(ARDUINO_ID);
         handshake = 1;
       }   
@@ -117,6 +115,5 @@ void loop() {
       }
     }
   }
-  */
 }
 

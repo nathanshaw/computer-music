@@ -18,12 +18,14 @@ Firware for the Theia SR-04 Ultrasonic Rangefinder control shield
  - when message comes in for distance it just returns the most rescent result?
 
  */
+#define LED_FEEDBACK 1
+#define NUM_RANGEFINDERS 4
+#define BOT_ID 2
+#define BOARD_TYPE 4
+#define ARDUINO_ID 1
 
 #define RED_LED 12
 #define GREEN_LED 13
-#define LED_FEEDBACK 1
-#define NUM_RANGEFINDERS 4
-#define ARDUINO_ID 51
 #define POLLING_DELAY 50
 
 // for interfacing with the the SR-04 rangefinders
@@ -126,6 +128,8 @@ void pollSerial() {
       // message required for "handshake" to occur
       // happens once per Arduino at the start of the ChucK serial code
       if (sensor == 63 && parity == 1023 && handshake == 0) {
+        Serial.write(BOT_ID);
+        Serial.write(BOARD_TYPE);
         Serial.write(ARDUINO_ID);
         handshake = 1;
         digitalWrite(RED_LED, LOW);
