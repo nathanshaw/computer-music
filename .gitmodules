@@ -10,3 +10,6 @@
 [submodule "Hardware/Homados"]
 	path = Hardware/Homados
 	url = https://github.com/nathanshaw/Homados
+[submodule "Hardware/Hermes"]
+	path = Hardware/Hermes
+	url = https://github.com/nathanshaw/Hermes
