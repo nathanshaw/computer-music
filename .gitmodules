@@ -13,3 +13,6 @@
 [submodule "Hardware/Hermes"]
 	path = Hardware/Hermes
 	url = https://github.com/nathanshaw/Hermes
+[submodule "Installation/No_Humans_Allowed"]
+	path = Installation/No_Humans_Allowed
+	url = https://github.com/nathanshaw/No_Humans_Allowed
