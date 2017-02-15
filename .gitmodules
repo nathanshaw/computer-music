@@ -4,3 +4,6 @@
 [submodule "Hardware/Theia"]
 	path = Hardware/Theia
 	url = https://github.com/nathanshaw/Theia
+[submodule "Hardware/Brigid"]
+	path = Hardware/Brigid
+	url = https://github.com/nathanshaw/Brigid
