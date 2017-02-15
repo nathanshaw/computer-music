@@ -7,3 +7,6 @@
 [submodule "Hardware/Brigid"]
 	path = Hardware/Brigid
 	url = https://github.com/nathanshaw/Brigid
+[submodule "Hardware/Homados"]
+	path = Hardware/Homados
+	url = https://github.com/nathanshaw/Homados
