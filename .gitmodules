@@ -1,0 +1,6 @@
+[submodule "Hardware/Thor"]
+	path = Hardware/Thor
+	url = https://github.com/nathanshaw/Thor.git
+[submodule "Hardware/Theia"]
+	path = Hardware/Theia
+	url = https://github.com/nathanshaw/Theia
